@@ -48,17 +48,21 @@ user = 'biswas'
 email = 'biswassudiptto@gmail.com'
 # GRAB ALL THE DATA FROM THE USERNAME COLUMN
 all_username = User.query.with_entities(User.username).all() # cann do all_username[0] to get individual data
-all_users = [] # Put all unique users in this list, get inside the tuple
-all_users2 = "" # Use to convert into string to send to javascript
+all_users2 = "" # Use to convert into string to send to javascript, this is because you cannot send arrays with letters into JavaScript
 for i in all_username:
-    all_users.append(i[0]) # get values in tuple
-#print(all_users)
-
-for i in all_users:
-    x = i + " " # space after every user
+    x = i[0] + " " # make sure it's out of the tuple form
     all_users2 += x
-#print(all_users2)
-# Note for teacher: We are converting all_users2 into 
+print(all_users2)
+
+# GRAB ALL THE DATA FROM THE EMAIL COLUMN
+all_emails = User.query.with_entities(User.email).all()
+all_email = ""
+for i in all_emails:
+    x = i[0] + " "
+    all_email += x
+#print(type(all_email)) // WORKS!
+#print(all_email)
+
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
     x = ['s', 'd']
@@ -70,15 +74,12 @@ def signup():
         print('works')
         print(req['email'])
         print(req['username'])
-        if(False):
-            message = {'greeting':'Please have an unique Email'}
-            print('false')
-            return jsonify(message)
-        else:
-            print('Signed up: ' + req['username'])
+        
+        print('Signed up: ' + req['username'])
+        #return {"message": "Signed Up!"}
             
                 
-    return render_template('signup.html', userz=all_users2)
+    return render_template('signup.html', userz=all_users2, mailxs=all_email)
 
     
 
