@@ -1,10 +1,30 @@
-function verify_user()
+function verify_user(all_userx, usernamex){
+  // Iterate throughout all_users (list)
+  // If the name exists in the database return true
+  //console.log(usernamex);
+    let num = 0;
+    
+    for(let i in all_userx){
+      if(usernamex == all_userx[i]){
+        //console.log('Match') verify
+        num += 1;
+        break;
+      }
+    }
+    //console.log(num);
+    if(num > 0){
+      return true; // true == theres a match
+    }else{
+      return false;
+    }
+  
+}
 
 function signup(userz){ 
   // Note: userz is the string with all the user data from flask (python file)
     // Why are we doing this instead of list? In javascript you cannot pass an array with lists from html to javascript only arrays with numbers. As a result i had to convert the array in python to a string, then ima do a javascript split in order to get an array
     // Get all the values from the form 
-    console.log(userz);
+    //console.log(userz);
     let all_users = userz.split(" "); // Spit based on the spaces and convert to array
     // Code below used to verify
     //console.log(all_users);
@@ -65,7 +85,12 @@ function signup(userz){
       alert('Make sure both passwords are the same');
       location.reload();
     }
-    
+    // using verify_user function which takes 2 parameters
+    else if(verify_user(all_users, username)){
+      alert("Username already in use, please use a new username");
+      location.reload(); // reload the page if there is issues
+      
+    }
   
     else {
     var entry = {
