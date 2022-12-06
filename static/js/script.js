@@ -1,5 +1,15 @@
+function verify_user()
+
 function signup(userz){ 
+  // Note: userz is the string with all the user data from flask (python file)
+    // Why are we doing this instead of list? In javascript you cannot pass an array with lists from html to javascript only arrays with numbers. As a result i had to convert the array in python to a string, then ima do a javascript split in order to get an array
     // Get all the values from the form 
+    console.log(userz);
+    let all_users = userz.split(" "); // Spit based on the spaces and convert to array
+    // Code below used to verify
+    //console.log(all_users);
+    //console.log(typeof(all_users));
+
     firstName = fname.value;
     lastName = lname.value;
     email = email.value;
@@ -8,7 +18,7 @@ function signup(userz){
     username = username.value;
     // Do a forloop
     let total_value = 1; // use this in order to see if the user's username already exists
-    console.log(userz);
+    
     //alert(firstName + " " + lastName + " " + email + " " + password + " " + confirm_password + " " + username); Confirm if all the values are got! 
     // Convert to dictionary
     

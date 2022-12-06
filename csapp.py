@@ -78,7 +78,7 @@ def signup():
             print('Signed up: ' + req['username'])
             
                 
-    return render_template('signup.html', userz=['s', 'b'])
+    return render_template('signup.html', userz=all_users2)
 
     
 
