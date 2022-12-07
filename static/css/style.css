@@ -2,3 +2,97 @@ body{
     background-color: black;
     color: white;
 }
+
+.logo {
+    width: 180px;
+    height: 120px;
+    margin-right: auto;
+    margin-left: -85px;
+    margin-top: 10px; 
+    /*the margin top pushes the logo down by 10 pixels*/
+    
+  }
+.container {
+    list-style: none;
+    display: flex;
+    background-color: rgb(201, 195, 195);
+    border-radius: 20px;
+    font-size: 30px;
+    margin-right: 20px;
+
+}
+.container:hover{
+    background-color: white;
+    animation: reverse;
+    transition: 1s;
+}
+.items {
+padding-right: 115px;
+padding-top: 40px;
+color: black;
+}
+.items a {
+color: black;
+
+font-family: 'Indie Flower', cursive;
+font-family: 'Nerko One', cursive;
+
+}
+.items a:hover {
+color: white;
+background-color: black;
+border-radius: 20px;
+transition: 1s;
+}
+
+.greeting{
+    background-color: white;
+    color: black;
+    border-radius: 25px;
+    border: solid 5px grey;
+    text-align: center;
+    font-family: 'Diplomata SC', cursive;
+    /*font-family: 'Indie Flower', cursive;*/
+    font-weight:900;
+    font-size: 50px;
+    transition: 1s;
+    
+}
+
+.greeting:hover{
+    background-color: black;
+    color: white;
+    font-family: 'Indie Flower', cursive;
+    transition: 1s;
+    border: dashed 5px white;
+  
+}
+
+
+ol {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+  }
+  
+  ol li:hover{
+    font-size: 40px;
+    color: white;
+    background: white;
+    background-color: black;
+  }
+  
+  ol li {
+    background: white;
+    color: black;
+    padding: 5px;
+    font-size: 25px;
+    margin-left: 35px;
+  }
+
+.live{
+    text-align: center;
+    color: white;
+    border-radius: 20px;
+    /*width: 50%;*/
+}

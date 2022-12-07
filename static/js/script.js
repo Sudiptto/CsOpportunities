@@ -146,7 +146,34 @@ function signup(userz, mailxs){
         headers : new Headers ({
           "content-type" :"application/json"
        })
-     }).then(window.location.replace("/home"))}
+     }).then(alert("Congrats you have signed up and made an account! " + username)).then(window.location.replace("/home"))}
 
 
 }
+
+function hi(username){
+  alert("Welcome " + username + " to the journey!");
+}
+
+
+function change() {
+  document.body.style.backgroundColor = "white";
+  document.body.style.Color = "black";
+  document.getElementById("live").style.color = "black";
+}
+
+
+document.getElementById("work").addEventListener("mouseover",changeTextA)
+document.getElementById("work").addEventListener("mouseout",changeTextOutA)
+
+
+
+  function description(){
+    document.getElementById("work").innerHTML="What does work on this website mean? It means that you can download the github repo (Check line 7)for this project and add features! Make sure to send these features to, biswassudiptto@gmail.com, and we will add them. This will help you for experience. We may also email you tasks to do for the website (optional). Great way to get experience";
+
+    document.getElementById("repo").innerHTML = "<a href='https://github.com/Sudiptto/CsOpportunities'>Click to access the github repo for this website</a>"
+  }
+
+  function og(){
+    document.getElementById("work").innerHTML= "Work on this website!";
+  }

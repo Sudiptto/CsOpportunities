@@ -49,9 +49,11 @@ class User(db.Model, UserMixin):
 xy = ""
 @app.route('/', methods=['POST', 'GET'])
 def login():
+  
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
+        
         user = User.query.filter_by(email=email).first() # query through the email
         if user: # if user exists 
             if check_password_hash(user.password, password):
@@ -64,7 +66,7 @@ def login():
             else:
                 flash('Incorrect password, try again.', category='error')
         else:
-            flash('Email does not exist.', category='error')
+            flash('Email does not exist.', category='error') 
     return render_template('login.html')
 
 # Below are test variables
@@ -93,7 +95,7 @@ def signup():
     
     if request.method == 'POST':
         req = request.get_json() # dictionary. get the json data being sent and conver to python dictionary
-        print(req)
+        #print(req)
         print('works')
         #print(req['email'])
         #print(req['username'])
@@ -108,13 +110,12 @@ def signup():
         new_user = User(username=username, password=generate_password_hash(password, method = "sha256"), email=email, first_name=first_name, last_name=last_name)
         db.session.add(new_user)
         db.session.commit()
-        xy += "Logged"
         login_user(new_user, remember=True)
         #return 'sf', 200
             
-                
+               # , userz=all_users2, mailxs=all_email
     return render_template('signup.html', userz=all_users2, mailxs=all_email)
-    
+
 @app.route('/logout')
 @login_required
 def logout():
