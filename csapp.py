@@ -114,6 +114,13 @@ def signup():
             
                 
     return render_template('signup.html', userz=all_users2, mailxs=all_email)
+    
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
 
 @app.route('/home')
 @login_required
