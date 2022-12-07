@@ -146,19 +146,7 @@ function signup(userz, mailxs){
         headers : new Headers ({
           "content-type" :"application/json"
        })
-     })}
+     }).then(window.location.replace("/home"))}
 
-
-    
-/*
- // If statement for signup
- (fetch('/signup')
- .then(function (response) { // create response
-     return response.text(); // return the text gotten from python
- }).then(function (text) {
-     console.log('GET response text:');
-     console.log(text); // Print the greeting as text
- }))/*{
-   window.location.replace("/home");} // Change location to home*/ 
 
 }

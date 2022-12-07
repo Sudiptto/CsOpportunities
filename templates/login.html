@@ -7,6 +7,23 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login_signup.css') }}">
 </head>
 <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+	{% if messages %}
+		{% for category, message in messages %}
+			{% if category=='error' %}
+				<div class="alert">
+					<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+					{{message}}
+				</div>
+			{% else %}
+			<div class="alert1"> <!--SUCCESS-->
+				<span class="closebtn1" onclick="this.parentElement.style.display='none';">&times;</span> 
+				{{message}}
+			  </div>
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+	{% endwith %}
     <form method="POST"> 
         <div class="container">
             <h1 style="color: white;">Login</h1>
