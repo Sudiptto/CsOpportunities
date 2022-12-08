@@ -96,3 +96,44 @@ ol {
     border-radius: 20px;
     /*width: 50%;*/
 }
+
+
+
+#container {
+  width: 80%;
+  /*border-radius: 25px;*/
+  border: 2px solid Black;
+  padding: 15px 15px 15px 15px;
+  margin: 20px 20px 20px 20px;
+  background: white;
+  color: black;
+  overflow: visible;
+  box-shadow: 5px 5px 2px #888888;
+  position: relative;
+  border-radius: 20px;
+}
+
+#x {
+    position: absolute;
+    background: red;
+    color: white;
+    top: -10px;
+    right: -10px;
+}
+
+.glow {
+  font-size: 40px;
+  color: #fff;
+  text-align: center;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #3b021f, 0 0 40px #3d0220, 0 0 50px #2d0318, 0 0 60px rgb(32, 1, 17), 0 0 70px #3a0520;
+  }
+  
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #190b12, 0 0 40px #d6d2d4, 0 0 50px #000000, 0 0 60px #090708, 0 0 70px #000000, 0 0 80px #000000;
+  }
+}

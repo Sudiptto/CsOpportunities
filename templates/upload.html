@@ -3,16 +3,24 @@
 {% block content%}
 <!--Opportunities-->
 {% for note in user.opportunities %}
-    <li class="list-group-item" style="color: white; background-color: transparent;">
-    <p>{{note.firstName}} {{note.lastName}}</p>
-    <p>Title: {{note.title}}</p>
-    <p>Description: {{note.data_tasks}}</p>
-    <button type="button" class="close" onClick="deleteEvent({{ note.id }})">
-        <span aria-hidden="true">&times;</span>
-    </button>
-    </li>
-{% endfor %}
+    <div class="box_container">
+   
+    
+    <div id="container">
+        <button type="button" class="close" onClick="deleteEvent({{ note.id }})" id="x">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    <h2 class="glow">{{note.title}}</h2>
+    <p>Written By: {{note.firstName}} {{note.lastName}} on {{note.date}}</p>
+    <h3>Start Date: {{note.datetime}}</h3>
+    <h3>Duration: {{note.duration}}</h3>
+    <h4>Money Per Hour: {{note.money_paid}}</h4>
+    <p>Desciption: <br> {{note.data_tasks}}</p>
 
+</div>
+{% endfor %}
+<br>
+<br>
 <input type="text" placeholder="Title of Project/Internship" id="title" name="title" required> <!--TITLE-->
 <br>
 <input type="number" placeholder="Number of Days" id="dayz" name="dayz" required> <!--DURATION-->
