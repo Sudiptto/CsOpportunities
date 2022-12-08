@@ -168,12 +168,82 @@ document.getElementById("work").addEventListener("mouseout",changeTextOutA)
 
 
 
-  function description(){
-    document.getElementById("work").innerHTML="What does work on this website mean? It means that you can download the github repo (Check line 7)for this project and add features! Make sure to send these features to, biswassudiptto@gmail.com, and we will add them. This will help you for experience. We may also email you tasks to do for the website (optional). Great way to get experience";
+  function description(x){
 
-    document.getElementById("repo").innerHTML = "<a href='https://github.com/Sudiptto/CsOpportunities'>Click to access the github repo for this website</a>"
+    if(x==1){
+    document.getElementById("work").innerHTML="<p>What does work on this website mean? It means that you can download the github repo (Check line 7)for this project and add features! Make sure to send these features to, biswassudiptto@gmail.com, and we will add them. This will help you for experience. We may also email you tasks to do for the website (optional). Great way to get experience</p>";
+
+    document.getElementById("repo").innerHTML = "<a href='https://github.com/Sudiptto/CsOpportunities'>Click to access the github repo for this website</a>"}
+    else if(x==2){
+      document.getElementById("project").innerHTML = "Work on projects to gain experience: In the opportunities/internship section, users can list projects and you can do these projects for credit! Just make sure to email to contact biswassudiptto@gmail.com and the user who gave the project idea that you are doing the project. If you do the project and have proof than you will earn credit. Check the contact section for more information"
+    }
   }
 
-  function og(){
-    document.getElementById("work").innerHTML= "Work on this website!";
+  function og(x){
+    if(x==1){
+    document.getElementById("work").innerHTML= "Work on this website!";}
+    else if(x==2){
+      document.getElementById("project").innerHTML = "Work on projects!"
+    }
+
   }
+
+// FUNCTIONS BELOW ARE FOR SENDING UPLOAD DATA TO PYTHON
+
+function send(){
+  //alert('hi');
+  title = title.value;
+  duration = dayz.value;
+  date = whichdate.value;
+  paid = money.value; // paid per hour
+  description = desc.value;
+
+  //alert(title + " " + duration + " " + date + " " + paid + " " + description)
+  //alert(typeof(date))
+  //alert(typeof(paid)) always returns a string
+  // Start the IF STATEMENTS
+  if(title.length == 0 || duration.length == 0 || paid.length == 0 || date.length == 0 || description.length == 0){
+    alert('Please fill out everything!')
+    location.reload();
+  }
+  else if(title.length <= 3 || title.length > 490){
+    alert('Please make the title length between 4 - 490 characters!');
+    location.reload();
+  }
+  else if(description.length <= 19 || description.length > 8000){
+    alert('Please make the description length between 20 - 8000 characters')
+  }
+  
+  else{
+    var entry = {
+      title: title,
+      duration: duration,
+      date: date,
+      paid: paid,
+      description: description
+  }
+    fetch ('/upload', {
+      method : "POST",
+      credentials : 'include',
+      body : JSON.stringify(entry),
+      cache : "no-cache",
+      headers : new Headers ({
+        "content-type" :"application/json"
+     })
+   })
+   alert('Added')
+   location.reload()
+  }
+  
+
+
+}
+
+function deleteEvent(noteId) {
+  fetch("/delete-note", {
+    method: "POST",
+    body: JSON.stringify({ noteId: noteId }),
+  }).then((_res) => {
+    window.location.href = "/upload";
+  });
+}

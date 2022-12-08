@@ -1,0 +1,27 @@
+{% extends 'base.html'%}
+
+{% block content%}
+<!--Opportunities-->
+{% for note in user.opportunities %}
+    <li class="list-group-item" style="color: white; background-color: transparent;">
+    <p>{{note.firstName}} {{note.lastName}}</p>
+    <p>Title: {{note.title}}</p>
+    <p>Description: {{note.data_tasks}}</p>
+    <button type="button" class="close" onClick="deleteEvent({{ note.id }})">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    </li>
+{% endfor %}
+
+<input type="text" placeholder="Title of Project/Internship" id="title" name="title" required> <!--TITLE-->
+<br>
+<input type="number" placeholder="Number of Days" id="dayz" name="dayz" required> <!--DURATION-->
+<br>
+<input type="date" placeholder="Date" id="whichdate" name="whichdate" required> <!--DATE-->
+<br>
+<input type="number" placeholder="Money Paid per hour?" id="money" name="money" required> <!--MONEY PAID PER HOUR-->
+<br>
+<textarea type="text" placeholder="Description" id="desc" name="desc"></textarea>
+<!--Description-->
+<button type="submit" onclick="send()">Post</button>
+{% endblock%}

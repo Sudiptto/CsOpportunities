@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, flash, redirect, url_for, mak
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, current_user, login_required, UserMixin, LoginManager
 from sqlalchemy.sql import func
+import json
 from flask_sqlalchemy import SQLAlchemy
 import os
 
@@ -122,11 +123,46 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-
+# Create routes after making loggin the users
 @app.route('/home')
 @login_required
 def home():
     return render_template('index.html', user=current_user)
+
+@app.route('/upload', methods=['POST', 'GET'])
+@login_required
+def upload():
+    if request.method == 'POST':
+        req = request.get_json()
+        title = req['title']
+        duration = int(req['duration'])
+        date = req['date']
+        paid = int(req['paid'])
+        description = req['description']
+
+        print('works')
+        #print(type(paid))
+        #print(title + ' ' + str(duration) + ' ' + date + ' ' + str(paid) + ' ' + description)
+
+        # add to database
+        #print(current_user.username + ' ' + current_user.id)
+        new_opp = Opportunities(data_tasks=description, firstName = current_user.first_name, lastName = current_user.last_name, title=title, email=current_user.email, datetime=date, duration=duration, money_paid=paid, user_id=current_user.id)
+        db.session.add(new_opp)
+        db.session.commit()
+    return render_template('upload.html', user=current_user)
+
+
+@app.route('/delete-note', methods=['POST'])
+def delete_note():
+    note = json.loads(request.data)
+    noteId = note['noteId']
+    note = Opportunities.query.get(noteId)
+    if note:
+        if note.user_id == current_user.id:
+            db.session.delete(note)
+            db.session.commit()
+
+    return jsonify({})
 
 """""""""
 print(xy)
