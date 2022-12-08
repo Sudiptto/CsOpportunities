@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<h1>Check out all the opportunities posted by our users!</h1>
+{% for info in opp%}
+<div class="box_container">
+    <div id="container">
+    <h2 class="glow">{{info.title}}</h2>
+    <p>Written By: {{info.firstName}} {{info.lastName}} on {{info.date}}</p>
+    <h3>Start Date: {{info.datetime}}</h3>
+    <h3>Duration: {{info.duration}}</h3>
+    <h4>Money Per Hour: {{info.money_paid}}</h4>
+    <p>Desciption: <br> {{info.data_tasks}}</p>
+    <p>To learn more about this please contact: {{info.email}}</p>
+    <p>Created by user: {{info.username}}</p>
+</div>
+{% endfor %}
+{% endblock %}

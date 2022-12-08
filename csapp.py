@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, flash, redirect, url_for, mak
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, current_user, login_required, UserMixin, LoginManager
 from sqlalchemy.sql import func
+import requests
 import json
 from flask_sqlalchemy import SQLAlchemy
 import os
@@ -151,6 +152,12 @@ def upload():
         db.session.commit()
     return render_template('upload.html', user=current_user)
 
+@app.route('/opportunities')
+def opportunities():
+    all_opportunities = Opportunities.query.filter().all()
+    opp = all_opportunities[::-1]
+    return render_template('opportunities.html', user=current_user, opp = opp)
+
 
 @app.route('/delete-note', methods=['POST'])
 def delete_note():
@@ -163,6 +170,13 @@ def delete_note():
             db.session.commit()
 
     return jsonify({})
+
+
+@app.route('/stackproblems')
+@login_required
+def stackproblems():
+    set1 = requests.get('https://api.stackexchange.com/2.3/questions?order=desc&sort=activity&site=stackoverflow')
+    return render_template('stack.html', user=current_user, items=set1.json()['items'], x=0)
 
 """""""""
 print(xy)
