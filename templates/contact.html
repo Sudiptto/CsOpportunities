@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<h1  class="contactt">CONTACT</h1>
+
+<!--
+<form method="POST">
+    <button>SEND EMAIL</button>
+</form>-->
+
+<div class="containerr">
+<input type="text" placeholder="Subject" id="subject" name="subject" required class="subk"s> <!--Subject-->
+<br>
+<select id="type_issue" name="type_issue" class="options" placeholder="Issue">
+    <option value="Getting Credit">Getting Credit</option>
+    <option value="Project Submissions">Project Submission</option>
+    <option value="General Questions">General Questions</option>
+    <option value="Work for CSO!">Work for CSO!</option>
+  </select>
+<br>
+<textarea type="text" placeholder="Description" id="desc" name="desc" class="subk"></textarea> 
+<br>
+<button onclick="send_mail()" class="send_btn">Send Email</button>
+</div>
+
+{% endblock %}

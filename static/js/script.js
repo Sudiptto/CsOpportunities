@@ -247,3 +247,38 @@ function deleteEvent(noteId) {
     window.location.href = "/upload";
   });
 }
+
+function send_mail(){
+  type_problem = type_issue.value;
+  subject = subject.value;
+  description = desc.value;
+  if(type_problem.length == 0 || subject.length == 0 || description.length == 0){
+    alert("Please fill out all the required fields");
+    location.reload();
+  }
+  else if(subject.length < 6 || subject.length > 2000) {
+    alert("Please make the subject between 6 - 2000 characters");
+    location.reload();
+  }
+  else if(description.length < 6 || description.length > 4000) {
+    alert("Please make the description between 6 - 4000 characters");
+    location.reload();
+  }else{
+    var entry = {
+      type_problem: type_problem,
+      subject: subject,
+      description: description
+    }
+    fetch ('/contact', {
+      method : "POST",
+      credentials : 'include',
+      body : JSON.stringify(entry),
+      cache : "no-cache",
+      headers : new Headers ({
+        "content-type" :"application/json"
+     })
+   })
+    alert("Sent, we hope to respond soon! (We will send an email back to the email used to create your account) ");
+    location.reload();
+  }
+}

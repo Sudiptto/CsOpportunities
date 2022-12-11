@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request, flash, redirect, url_for, make_response, jsonify
+from flask_mail import Mail, Message
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, current_user, login_required, UserMixin, LoginManager
 from sqlalchemy.sql import func
 import requests
 import json
+from password import *
 from flask_sqlalchemy import SQLAlchemy
 import os
 
@@ -13,6 +15,15 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db' # initialize fla
 db = SQLAlchemy(app) # initialize flask sql database, db
 
 
+# configure the email
+
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'csopp4all@gmail.com' # senders username 
+app.config['MAIL_PASSWORD'] = passwordd
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app) # initialize flask mail
 
 # Initialize LoginManager
 login_manager = LoginManager()
@@ -178,6 +189,25 @@ def stackproblems():
     set1 = requests.get('https://api.stackexchange.com/2.3/questions?order=desc&sort=activity&site=stackoverflow')
     return render_template('stack.html', user=current_user, items=set1.json()['items'], x=0)
 
+@app.route('/contact', methods=['GET', 'POST'])
+@login_required
+def contact():
+    # start with subject
+    if request.method == 'POST':
+        # the hey is the subject
+        req = request.get_json()
+        subject = req['subject']
+        type_of_question = req['type_problem']
+        description = req['description'] 
+        print(subject)
+        print(type_of_question)
+        print(description)
+        # send to mail
+        msg = Message(subject, sender="noreplycs.com", recipients=['csopp4all@gmail.com'])
+        msg.body = "Type of question: " + type_of_question + ", Description: " + description + ", Written by: " + current_user.email + " First name: " + current_user.first_name + " Last name: " + current_user.last_name 
+        mail.send(msg)
+        return "Send email"
+    return render_template('contact.html')
 """""""""
 print(xy)
 if xy == "Logged":
