@@ -202,6 +202,8 @@ def contact():
         description = req['description'] 
         # send to mail
         msg = Message(subject, sender="noreplycs.com", recipients=['csopp4all@gmail.com'])
+
+
         """msg.body = "Type of question: " + type_of_question + ", Description: " + description + ", Written by: " + current_user.email + " First name: " + current_user.first_name + " Last name: " + current_user.last_name """
         
         color1  = 'white'
