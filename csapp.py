@@ -189,6 +189,7 @@ def stackproblems():
     set1 = requests.get('https://api.stackexchange.com/2.3/questions?order=desc&sort=activity&site=stackoverflow')
     return render_template('stack.html', user=current_user, items=set1.json()['items'], x=0)
 
+
 @app.route('/contact', methods=['GET', 'POST'])
 @login_required
 def contact():
@@ -199,12 +200,15 @@ def contact():
         subject = req['subject']
         type_of_question = req['type_problem']
         description = req['description'] 
-        print(subject)
-        print(type_of_question)
-        print(description)
         # send to mail
         msg = Message(subject, sender="noreplycs.com", recipients=['csopp4all@gmail.com'])
-        msg.body = "Type of question: " + type_of_question + ", Description: " + description + ", Written by: " + current_user.email + " First name: " + current_user.first_name + " Last name: " + current_user.last_name 
+        """msg.body = "Type of question: " + type_of_question + ", Description: " + description + ", Written by: " + current_user.email + " First name: " + current_user.first_name + " Last name: " + current_user.last_name """
+        
+        color1  = 'white'
+        bg_color = 'black'
+        #msg.html = "<h1>This is a test email from Flask-Mail</h1>"
+        msg.html = "<p style='color: white; background-color: black; font-size: 25px; '>Type of Question: <strong> " + type_of_question + " </strong> <br> Description: "+ description +" <br> Written By: " + current_user.email + "<br> Full Name: " + current_user.first_name + " " + current_user.last_name + "</p>"
+        
         mail.send(msg)
         return "Send email"
     return render_template('contact.html')
