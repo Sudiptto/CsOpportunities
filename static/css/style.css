@@ -243,3 +243,25 @@ input:hover{
   transition: 1s;
   border: 3px solid white;
 }
+
+
+
+table {
+  border-collapse: separate;
+  border-spacing: 30px;
+}
+
+
+.post_data{
+  background-color: white;
+  border-radius: 20px;
+  width: 90px;
+  height: 60px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.post_data:hover{
+  background-color: black;
+  color: white;
+  transition: 0.5s;
+}

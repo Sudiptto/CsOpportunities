@@ -212,6 +212,7 @@ function send(){
   }
   else if(description.length <= 19 || description.length > 8000){
     alert('Please make the description length between 20 - 8000 characters')
+    location.reload();
   }
   
   else{
