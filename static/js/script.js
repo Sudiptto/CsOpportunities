@@ -150,7 +150,7 @@ function signup(userz, mailxs){
 
 
 }
-
+// alert if the user clicks their name
 function hi(username){
   alert("Welcome " + username + " to the journey!");
 }
@@ -222,7 +222,8 @@ function send(){
       date: date,
       paid: paid,
       description: description
-  }
+  } // the entry puts all the responses into a dictionary
+  // fetch to the upload url
     fetch ('/upload', {
       method : "POST",
       credentials : 'include',
@@ -233,13 +234,13 @@ function send(){
      })
    })
    alert('Added')
-   location.reload()
+   location.reload() // reload
   }
   
 
 
 }
-
+// fetch("/url"), this will fetch the url that is found on the flask app
 function deleteEvent(noteId) {
   fetch("/delete-note", {
     method: "POST",
@@ -250,9 +251,11 @@ function deleteEvent(noteId) {
 }
 
 function send_mail(){
+  // grab the values
   type_problem = type_issue.value;
   subject = subject.value;
   description = desc.value;
+  /* Data below is used to check the note, the first field checks if everything has been filled out */
   if(type_problem.length == 0 || subject.length == 0 || description.length == 0){
     alert("Please fill out all the required fields");
     location.reload();

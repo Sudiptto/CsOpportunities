@@ -8,7 +8,7 @@ import json
 from password import *
 from flask_sqlalchemy import SQLAlchemy
 import os
-
+ 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('FLASK_PASSWORD')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db' # initialize flask sql database
@@ -165,18 +165,19 @@ def upload():
 
 @app.route('/opportunities')
 def opportunities():
-    all_opportunities = Opportunities.query.filter().all()
-    opp = all_opportunities[::-1]
+    all_opportunities = Opportunities.query.filter().all() # filter the database for every opportunity 
+    opp = all_opportunities[::-1] # reverse the list 
     return render_template('opportunities.html', user=current_user, opp = opp)
 
-
+# this will delete the opportunites
+# get the data from javascript, it will get the opportunity id and than it will check if the note exists
 @app.route('/delete-note', methods=['POST'])
 def delete_note():
     note = json.loads(request.data)
     noteId = note['noteId']
     note = Opportunities.query.get(noteId)
-    if note:
-        if note.user_id == current_user.id:
+    if note: # if the note exists
+        if note.user_id == current_user.id: # if the note user id matches the user id of the person that is currently logged in
             db.session.delete(note)
             db.session.commit()
 
@@ -186,6 +187,7 @@ def delete_note():
 @app.route('/stackproblems')
 @login_required
 def stackproblems():
+    # get the data that is in that link 
     set1 = requests.get('https://api.stackexchange.com/2.3/questions?order=desc&sort=activity&site=stackoverflow')
     return render_template('stack.html', user=current_user, items=set1.json()['items'], x=0)
 
@@ -194,6 +196,7 @@ def stackproblems():
 @login_required
 def contact():
     # start with subject
+    # the data below comes from javascript
     if request.method == 'POST':
         # the hey is the subject
         req = request.get_json()
